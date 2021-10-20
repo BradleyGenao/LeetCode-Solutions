@@ -1,14 +1,13 @@
-import collections
+from collections import defaultdict
+
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         
+        anagrams = defaultdict(list)
         
-         anagram_dict = defaultdict(list)
+        for string in strs:
+            anagrams[str(sorted(string))].append(string)
         
-         for string in strs:
-                anagram_dict[str(sorted(string))].append(string)
-        
-         return anagram_dict.values()
-    
+        return anagrams.values()
         
