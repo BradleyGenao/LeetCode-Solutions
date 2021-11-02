@@ -1,19 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        
-        
-        answer = []
-        self.permute_rec(nums, 0, [], answer)
-        return answer
+        ans = []
+        self.rec(nums, [], 0, ans)
+        return ans
     
-    def permute_rec(self, nums, index, curr_perm, answer):
-        if len(nums) == index:
-            answer.append(curr_perm)
+    def rec(self, nums, curr, index, ans):
+        
+        if len(nums) ==index:
+            ans.append(curr)
         else:
-            for i in range(len(curr_perm) + 1):
-                new_perm = list(curr_perm)
+            for i in range(len(curr) + 1):
+                new_perm = list(curr)
                 new_perm.insert(i, nums[index])
-                self.permute_rec(nums, index+1, new_perm, answer)
-        
-        
+                self.rec(nums, new_perm, index+1, ans)
         
