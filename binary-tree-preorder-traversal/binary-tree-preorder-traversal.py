@@ -4,19 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         
-        #DFS Rec
-        if not root:
-            return None
-        ans = []
-        def dfs(node, ans):
-            if not node:
-                return 
-            ans.append(node.val)
-            dfs(node.left, ans)
-            dfs(node.right, ans)
-        dfs(root, ans)
-        return ans
+        #Iteratively Summarization
         
+        ans, stack = [], [(root, False)]
+        
+        while stack:
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    ans.append(node.val)
+                else:
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+                    stack.append((node, True))
+        return ans
