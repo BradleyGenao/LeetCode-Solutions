@@ -11,36 +11,29 @@ class Solution:
         Complexity: Time O(v^3) Space O(v^2)
 
         """
+        matrix = [[math.inf for _ in range(n)] for _ in range(n)]
         
-        matrix = [[math.inf for _ in range(n)] for _ in range(n) ]
-      
-        for start, end, weight in edges:
-            matrix[start][end] = weight
-            matrix[end][start] = weight
+        for frm, to, weight in edges:
+            matrix[to][frm] = weight
+            matrix[frm][to] = weight
             
-            
-            matrix[start][start] = 0
-            matrix[end][end] = 0
-        
-        #Floyd Warshal Algo
+            matrix[to][to] = 0
+            matrix[frm][frm] = 0
         
         for i in range(n):
             for j in range(n):
                 for k in range(n):
-                    matrix[k][j] = matrix[j][k] = min(matrix[j][k], matrix[j][i] + matrix[i][k])
+                    matrix[j][k] = matrix[k][j] = min(matrix[j][k], matrix[i][k] + matrix[i][j])
         
-        
-        min_count = math.inf
-        vertex = -1
+        vertice, min_cost = -1, math.inf
         
         for i in range(n):
-            count = 0
+            cost = 0
             for j in range(n):
-                if i ==j or matrix[j][i] == math.inf:
-                    continue
+                if i ==j or matrix[i][j] == math.inf: continue
                 if matrix[i][j] <= distanceThreshold:
-                    count +=1
-            if count <= min_count:
-                min_count = count
-                vertex = i
-        return vertex
+                    cost +=1
+            if min_cost >= cost:
+                min_cost = cost
+                vertice = i
+        return vertice
