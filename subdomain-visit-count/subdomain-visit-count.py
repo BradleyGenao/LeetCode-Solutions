@@ -1,30 +1,18 @@
 class Solution:
     def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        domain_counts= collections.defaultdict(int)
         
-        
-        domains = {}
-        
-        for domain in cpdomains:
+        for domains in cpdomains:
+            score, _, domain = domains.partition(' ')
+            score = int(score)
             
-            num = int(domain.split()[0])
-            item = domain.split()[1]
+            domain_counts[domain] += score
             
-            if item in domains:
-                domains[item] += num
-            else:
-                domains[item] = num
-            
-            for i in range(len(item)):
-                if item[i] == '.':
-                    elem = item[i+1:]
-                    if elem in domains:
-                        domains[elem] += num
-                    else:
-                        domains[elem] = num
-        answer = []
-        for key, value in domains.items():
-            answer.append(str(value) + ' ' + key)
-        return answer
-        
-        
-        
+            for i, char in enumerate(domain):
+                if char == '.':
+                    elem = domain[i+1:]
+                    domain_counts[elem] += score
+        res = []
+        for key, value in domain_counts.items():
+            res.append(str(value) + ' ' + key)
+        return res
