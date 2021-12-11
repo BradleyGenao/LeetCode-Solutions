@@ -8,10 +8,7 @@ class Solution:
         def climb(n):
             if n in memo:
                 return memo[n]
-            else:
-                memo[n] = climb(n - 1) + climb(n-2)
-                return memo[n]
-
+            memo[n] = climb(n-1) + climb(n-2)
+            return memo[n]
         return climb(n)
-        
         
