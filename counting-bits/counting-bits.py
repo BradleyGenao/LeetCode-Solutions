@@ -1,7 +1,9 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        dp = [0] * (n + 1)
-        for num in range(n + 1):
-            dp[num] = dp[num//2] + (num % 2)
-        return dp
+        ans = [0] * (n + 1)
+        
+        
+        for i in range(n + 1):
+            ans[i] = ans[i//2] + (i % 2)
+        return ans
         
