@@ -6,15 +6,15 @@
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
         
+        
+        
         sent = ListNode(0)
         sent.next = head
-        
         prev, curr = sent, head
         
         while curr:
             if curr.val == val:
                 prev.next = curr.next
-                
             else:
                 prev = curr
             curr = curr.next
