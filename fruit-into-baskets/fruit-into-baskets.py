@@ -1,26 +1,18 @@
-import collections
-
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
         
-        basket = defaultdict(int)
-        win_start = 0
-        max_len = - math.inf
-        
-        for win_end in range(len(fruits)):
-            right = fruits[win_end]
-            basket[right] +=1
+        basket = collections.defaultdict(int)
+        start = 0
+        max_fruits = 0
+        for end, fruit in enumerate(fruits):
+            basket[fruit] +=1
             
             while len(basket) > 2:
-                left = fruits[win_start]
-                basket[left] -= 1
-                if basket[left] == 0:
-                    del basket[left]
-                win_start +=1
-            max_len = max(max_len, win_end - win_start + 1)
-        
-        return max_len
-            
-        
-        
+                left_fruit = fruits[start]
+                basket[left_fruit] -=1
+                if  basket[left_fruit] == 0:
+                    del  basket[left_fruit]
+                start +=1
+            max_fruits = max(max_fruits, end - start + 1)
+        return max_fruits
         
