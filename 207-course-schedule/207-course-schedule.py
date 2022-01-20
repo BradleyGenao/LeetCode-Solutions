@@ -1,17 +1,18 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        
+        
+        
         graph = defaultdict(set)
         in_degrees = defaultdict(int)
         for i in range(numCourses):
             graph[i].add(i)
-            in_degrees[i] = 0 
+            in_degrees[i] =0
         for nxt_course, prev_course in prerequisites:
             graph[nxt_course].add(prev_course)
             in_degrees[prev_course] +=1
-        
-        queue = deque()
-        seen = set()
-        
+        queue, seen = deque(), set()
         for index, in_degree in in_degrees.items():
             if in_degree == 0:
                 queue.append(index)
@@ -23,3 +24,5 @@ class Solution:
                 if in_degrees[g] == 0:
                     queue.append(g)
         return len(seen) == numCourses
+        
+        
