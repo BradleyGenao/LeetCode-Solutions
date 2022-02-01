@@ -3,10 +3,11 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        pos = 0
+        last_zero = 0
+        
         for i, num in enumerate(nums):
             if num != 0:
-                if i != pos:
-                    nums[i], nums[pos] = nums[pos], nums[i]
-                pos +=1
+                if i != last_zero:
+                    nums[i], nums[last_zero] = nums[last_zero], nums[i]
+                last_zero +=1
         return nums
