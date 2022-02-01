@@ -6,19 +6,22 @@
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         
-        heap = []
-        
-        while list1:
-            heapq.heappush(heap, list1.val)
-            list1 = list1.next
-            
-        while list2:
-            heapq.heappush(heap, list2.val)
-            list2 = list2.next
-        
-        temp = ans = ListNode(0)
-        
-        while heap:
-            temp.next = ListNode(heapq.heappop(heap))
-            temp = temp.next
+        if not list1:
+            return list2
+        if not list2:
+            return list1
+        dummy = ans = ListNode(-1)
+        while list1 and list2:
+            if list1.val <= list2.val:
+                dummy.next = list1
+                list1 = list1.next
+            else:
+                dummy.next = list2
+                list2 = list2.next
+            dummy = dummy.next
+        if list1:
+            dummy.next = list1
+        if list2:
+            dummy.next = list2
         return ans.next
+        
