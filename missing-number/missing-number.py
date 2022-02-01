@@ -1,13 +1,10 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         
-        
-        compare = {}
+        hash_set = set(nums)
         
         for i in range(len(nums) + 1):
-            compare[i] = 0
+            if i not in hash_set:
+                return i
         
-        for num in compare:
-            if num not in nums:
-                return num
         
