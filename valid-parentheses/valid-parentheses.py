@@ -1,38 +1,21 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         
-        """
         
-        using a stack 
-        iterate through the list when a ( [ { is found add to stack
-        check stack is not empaty return false
-        
-        if char == closing 
-        pop stack if pop is not opening return false
-        
-        at the end check if the stack is empty return true
-        
-        """
-        
+        opening = {'(', '{', '['}
+        closed = {')': '(', ']' : '[', '}' : '{' }
         stack = []
+        
         for char in s:
-            if char == '(' or char == '[' or char == '{':
+            if char in opening:
                 stack.append(char)
-            if len(stack) == 0:
+            elif not stack:
                 return False
-            if char == ')':
-                z = stack.pop()
-                if z != '(':
+            elif char in closed:
+                top_stack = stack.pop()
+                if closed[char] != top_stack:
                     return False
-            if char == '}':
-                z = stack.pop()
-                if z != '{':
-                    return False
-            if char == ']':
-                z = stack.pop()
-                if z != '[':
-                    return False
-        if len(stack) == 0:
-            return True
-        else:
-            return False
+        return not stack
+        
+        
+        
