@@ -1,8 +1,7 @@
 class Solution:
     def tribonacci(self, n: int) -> int:
         
-        if n <3:
-            return 1 if n else 0
+        
         
         
         memo = {}
