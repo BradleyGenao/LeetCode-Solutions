@@ -10,7 +10,7 @@ class Solution:
         for i in range(n):
             if i in seen: continue
             queue.append(i)
-            seen.add(i)
+          
             while  queue:
                 curr = queue.popleft()
                 for neigh in graph[curr]:
